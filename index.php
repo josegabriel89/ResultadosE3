@@ -105,7 +105,6 @@
                 padding: 5px 5px 5px 30px;
             }
         </style>
-
         <link rel="stylesheet" href="estadisticas.css">
     </head>
     <body>
@@ -182,38 +181,37 @@
             ?>
             <div id="fondorojo"></div>
             <img id="imglogoe3" src="img/iconoE3.png" class=" center-block img-responsive">
-
             <div id="resultadosgenerales" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="Empresa col-xs-4 col-sm-3 col-md-1 col-md-offset-2">
-                    <img id="imgempresaea" class="imgempresa img-rounded img-responsive" alt="ea" src="img/logoea.png"></img>
+                    <img id="imgempresaea" class="imgempresa img-rounded img-responsive" alt="ea" src="img/logoea.png" onclick="activarEmpresa(1)"></img>
                     <div class="textonotas container-fluid"><span class="notamedia lead" id="notamediaea"><?php echo number_format($notamediaea, 2) ?></span></div>
                 </div>
                 <div class="Empresa col-xs-4 col-sm-3 col-md-1">
-                    <img id="imgempresamicro" class="imgempresa img-rounded img-responsive" alt="microsoft" src="img/logomicrosoft.png"></img>
+                    <img id="imgempresamicro" class="imgempresa img-rounded img-responsive" alt="microsoft" src="img/logomicrosoft.png" onclick="activarEmpresa(2)"></img>
                     <div class="textonotas container-fluid"><span class="notamedia" id="notamediamicro"><?php echo number_format($notamediamicrosoft, 2) ?></span></div>
                 </div>
                 <div class="Empresa col-xs-4 col-sm-3 col-md-1">
-                    <img id="imgempresabethesda" class="imgempresa img-rounded img-responsive" alt="bethesda" src="img/logobethesda.png"></img>
+                    <img id="imgempresabethesda" class="imgempresa img-rounded img-responsive" alt="bethesda" src="img/logobethesda.png" onclick="activarEmpresa(3)"></img>
                     <div class="textonotas container-fluid"><span class="notamedia" id="notamediabethesda"><?php echo number_format($notamediabethesda, 2) ?></span></div>
                 </div>
                 <div class="Empresa col-xs-4 col-sm-3 col-md-1">
-                    <img id="imgempresapcgaming" class="imgempresa img-rounded img-responsive" alt="pc" src="img/logopcgaming.png"></img>
+                    <img id="imgempresapcgaming" class="imgempresa img-rounded img-responsive" alt="pc" src="img/logopcgaming.png" onclick="activarEmpresa(4)"></img>
                     <div class="textonotas container-fluid"><span class="notamedia" id="notamediapcgaming"><?php echo number_format($notamediapcgaming, 2) ?></span></div>
                 </div>
                 <div class="Empresa col-xs-4 col-sm-3 col-md-1">
-                    <img id="imgempresaubi" class="imgempresa img-rounded img-responsive"  alt="ubisoft" src="img/logoubisoft.png"></img>
+                    <img id="imgempresaubi" class="imgempresa img-rounded img-responsive"  alt="ubisoft" src="img/logoubisoft.png" onclick="activarEmpresa(5)"></img>
                     <div class="textonotas container-fluid"><span class="notamedia" id="notamediaubi"><?php echo number_format($notamediaubisoft, 2) ?></span></div>
                 </div>
                 <div class="Empresa col-xs-4 col-sm-3 col-md-1">
-                    <img id="imgempresasony" class="imgempresa img-rounded img-responsive"  alt="sony" src="img/logosony.png"></img>
+                    <img id="imgempresasony" class="imgempresa img-rounded img-responsive"  alt="sony" src="img/logosony.png" onclick="activarEmpresa(6)"></img>
                     <div class="textonotas container-fluid"><span class="notamedia" id="notamediasony"><?php echo number_format($notamediasony, 2) ?></span></div>
                 </div>
                 <div class="Empresa col-xs-4 col-sm-3 col-md-1">
-                    <img id="imgempresanintendo" class="imgempresa img-rounded img-responsive" alt="nintendo" src="img/logonintendo.png"></img>
+                    <img id="imgempresanintendo" class="imgempresa img-rounded img-responsive" alt="nintendo" src="img/logonintendo.png" onclick="activarEmpresa(7)"></img>
                     <div class="textonotas container-fluid"><span class="notamedia" id="notamedianintendo"><?php echo number_format($notamedianintendo, 2) ?></span></div>
                 </div>
                 <div class="Empresa col-xs-4 col-sm-3 col-md-1" id="3eresumen">
-                    <img id="imgempresae3" class="imgempresa img-rounded img-responsive" alt="E3" src="img/logoe3.png"></img>
+                    <img id="imgempresae3" class="imgempresa img-rounded img-responsive" alt="E3" src="img/logoe3.png" onclick="activarEmpresa(0)"></img>
                     <div class="textonotas container-fluid"><span class="notamedia" id="notamediae3"><?php echo number_format((($notamediaea + $notamediamicrosoft + $notamediabethesda + $notamediapcgaming + $notamediaubisoft + $notamediasony + $notamedianintendo) / 7), 2) ?></span></div>
                 </div>
             </div>
@@ -278,10 +276,11 @@
         <p class="text-right" id="textocreadores">Creado por: Programador <a href="https://twitter.com/JoseGHell">@JoseGHell</a> y Diseñador <a href="https://twitter.com/Elthorcazo">@Elthorcazo</a></p>
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script>
-            google.load("visualization", "1", {packages: ["corechart"]});
-            google.setOnLoadCallback(drawCharts);
-
-            var notas = [
+                        google.load("visualization", "1", {packages: ["corechart"]});
+                        google.setOnLoadCallback(redibujartablas);
+                        var empresasactivas = [true, true, true, true, true, true, true, true];
+                        var notasmostradas = new Array();
+                        var notas = [
 <?php
 echo "                    ['Nota'";
 foreach ($empresas as $nombre) {
@@ -297,163 +296,221 @@ for ($i = 1; $i <= 10; $i++) {
     echo "]";
 }
 ?>
-            ];
-            function drawCharts() {
-                var colores = ["#FFC400",
-                    "#007D00",
-                    "#FF7BAA",
-                    "#222222",
-                    "#58D3F7",
-                    "#064695",
-                    "#FF000A"];
+                        ];
+                        var coloresactualizados = new Array();
+                        var colores = ["#FFC400",
+                            "#007D00",
+                            "#FF7BAA",
+                            "#222222",
+                            "#58D3F7",
+                            "#064695",
+                            "#FF000A"];
+                        var mediassactualizadas = new Array();
+                        var medias = [['Empresa', 'Nota Media'],
+                            ['EA', <?php echo number_format($notamediaea, 2) ?>],
+                            ['Microsoft', <?php echo number_format($notamediamicrosoft, 2) ?>],
+                            ['Bethesda', <?php echo number_format($notamediabethesda, 2) ?>],
+                            ['PC Gaming', <?php echo number_format($notamediapcgaming, 2) ?>],
+                            ['Ubisoft', <?php echo number_format($notamediaubisoft, 2) ?>],
+                            ['Sony', <?php echo number_format($notamediasony, 2) ?>],
+                            ['Nintendo', <?php echo number_format($notamedianintendo, 2) ?>]
+                        ];
 
-                var barData = google.visualization.arrayToDataTable(notas);
-                // set bar chart options
-                var barOptions = {
-                    focusTarget: 'category',
-                    backgroundColor: 'transparent',
-                    colors: colores,
-                    fontName: 'Open Sans',
-                    chartArea: {
-                        left: 50,
-                        top: 10,
-                        width: '100%',
-                        height: '70%'
-                    },
-                    bar: {
-                        groupWidth: '80%'
-                    },
-                    hAxis: {
-                        title: 'Puntuación',
-                        textStyle: {
-                            fontSize: 10
+                        /**
+                         * Array que actualiza las array de datos, medias y colores para recargar las tablas.
+                         */
+                        function prepararDatos() {
+                            notasmostradas = [];
+                            coloresactualizados = [];
+                            mediassactualizadas = [];
+                            for (i = 0; i < notas.length; i++) {
+                                var arraytransito = new Array();
+                                for (u = 0; u < notas[i].length; u++) {
+                                    if (empresasactivas[u]) {
+                                        arraytransito.push(notas[i][u]);
+                                    }
+                                }
+                                notasmostradas.push(arraytransito);
+                                if (empresasactivas[i] && i != 0) {
+                                    coloresactualizados.push(colores[i - 1]);
+                                }
+                                if (empresasactivas[i]) {
+                                    mediassactualizadas.push(medias[i]);
+                                }
+                            }
                         }
-                    },
-                    vAxis: {
-                        title: 'Nº de Votos',
-                        minValue: 0,
-                        maxValue: 12000,
-                        baselineColor: '#DDD',
-                        gridlines: {
-                            color: '#DDD',
-                            count: 8
-                        },
-                        textStyle: {
-                            fontSize: 9
+
+                        /**
+                         * Funcion para activar o desactivar una empresa de las tablas tras pulsar sobre cada logo.
+                         * El logo del E3 reactiva todas. Si no queda ninguna activa se reactivan todas.
+                         * @param {int} emp numero correspondiente de cada empresa 
+                         * @returns {undefined}
+                         */
+                        function activarEmpresa(emp) {
+                            if (emp == 0) {
+                                empresasactivas = [true, true, true, true, true, true, true, true];
+                            } else {
+                                if (empresasactivas[emp]) {
+                                    empresasactivas[emp] = false;
+                                    if (estanTodasDesactivadas()) {
+                                        empresasactivas = [true, true, true, true, true, true, true, true];
+                                    }
+                                } else {
+                                    empresasactivas[emp] = true;
+                                }
+                            }
+                            prepararDatos();
+                            redibujartablas();
                         }
-                    },
-                    legend: {
-                        position: 'bottom',
-                        textStyle: {
-                            fontSize: 12
+                        /**
+                         * Se comprueba si estan todas las empresas activadas y se devuelve un bolean segun corresponda.
+                         * @returns {Boolean} variable bandera para saber si estan todas las empresas desactivadas
+                         */
+                        function estanTodasDesactivadas() {
+                            var comprobacion = true;
+                            for (i = 1; i < empresasactivas.length; i++) {
+                                if (empresasactivas[i]) {
+                                    comprobacion = false;
+                                }
+                            }
+                            return comprobacion;
                         }
-                    },
-                    animation: {
-                        duration: 1200,
-                        easing: 'out',
-                        startup: true
-                    }
-                };
-                // draw bar chart twice so it animates
-                var barChart = new google.visualization.ColumnChart(document.getElementById('bar-chart'));
-                barChart.draw(barData, barOptions);
 
-
-                // BEGIN LINE GRAPH
-                var data = google.visualization.arrayToDataTable(notas);
-
-
-                var lineOptions = {
-                    backgroundColor: 'transparent',
-                    curveType: 'function',
-                    colors: colores,
-                    fontName: 'Open Sans',
-                    focusTarget: 'category',
-                    chartArea: {
-                        left: 50,
-                        top: 10,
-                        width: '100%',
-                        height: '70%'
-                    },
-                    hAxis: {
-                        title: 'Puntuación',
-                        textStyle: {
-                            fontSize: 10
-                        },
-                        baselineColor: 'transparent',
-                        gridlines: {
-                            color: 'transparent'
+                        /**
+                         * Funcion que pinta todas las tablas.
+                         */
+                        function DibujarCharts() {
+                            var barOptions = {
+                                focusTarget: 'category',
+                                backgroundColor: 'transparent',
+                                colors: coloresactualizados,
+                                fontName: 'Open Sans',
+                                chartArea: {
+                                    left: 50,
+                                    top: 10,
+                                    width: '100%',
+                                    height: '70%'
+                                },
+                                bar: {
+                                    groupWidth: '80%'
+                                },
+                                hAxis: {
+                                    title: 'Puntuación',
+                                    textStyle: {
+                                        fontSize: 10
+                                    }
+                                },
+                                vAxis: {
+                                    title: 'Nº de Votos',
+                                    minValue: 0,
+                                    maxValue: 12000,
+                                    baselineColor: '#DDD',
+                                    gridlines: {
+                                        color: '#DDD',
+                                        count: 8
+                                    },
+                                    textStyle: {
+                                        fontSize: 9
+                                    }
+                                },
+                                legend: {
+                                    position: 'bottom',
+                                    textStyle: {
+                                        fontSize: 12
+                                    }
+                                },
+                                animation: {
+                                    duration: 1200,
+                                    easing: 'out',
+                                    startup: true
+                                }
+                            };
+                            var barData = google.visualization.arrayToDataTable(notasmostradas);
+                            var barChart = new google.visualization.ColumnChart(document.getElementById('bar-chart'));
+                            barChart.draw(barData, barOptions);
+                            var lineOptions = {
+                                backgroundColor: 'transparent',
+                                curveType: 'function',
+                                colors: coloresactualizados,
+                                fontName: 'Open Sans',
+                                focusTarget: 'category',
+                                chartArea: {
+                                    left: 50,
+                                    top: 10,
+                                    width: '100%',
+                                    height: '70%'
+                                },
+                                hAxis: {
+                                    title: 'Puntuación',
+                                    textStyle: {
+                                        fontSize: 10
+                                    },
+                                    baselineColor: 'transparent',
+                                    gridlines: {
+                                        color: 'transparent'
+                                    }
+                                },
+                                vAxis: {
+                                    title: 'Nº de votos',
+                                    minValue: 0,
+                                    maxValue: 1200,
+                                    baselineColor: '#DDD',
+                                    gridlines: {
+                                        color: '#DDD',
+                                        count: 12
+                                    },
+                                    textStyle: {
+                                        fontSize: 10
+                                    }
+                                },
+                                legend: {
+                                    position: 'bottom',
+                                    textStyle: {
+                                        fontSize: 12
+                                    }
+                                },
+                                animation: {
+                                    duration: 1200,
+                                    easing: 'out',
+                                    startup: true
+                                }
+                            };
+                            var data = google.visualization.arrayToDataTable(notasmostradas);
+                            var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
+                            chart.draw(data, lineOptions);
+                            var pieOptions = {
+                                backgroundColor: 'transparent',
+                                pieHole: 0.4,
+                                colors: coloresactualizados,
+                                pieSliceText: 'value',
+                                tooltip: {
+                                    text: 'percentage'
+                                },
+                                fontName: 'Open Sans',
+                                chartArea: {
+                                    width: '100%',
+                                    height: '94%'
+                                },
+                                legend: {
+                                    textStyle: {
+                                        fontSize: 13
+                                    }
+                                }
+                            };
+                            var pieData = google.visualization.arrayToDataTable(mediassactualizadas);
+                            var pieChart = new google.visualization.PieChart(document.getElementById('pie-chart'));
+                            pieChart.draw(pieData, pieOptions);
                         }
-                    },
-                    vAxis: {
-                        title: 'Nº de votos',
-                        minValue: 0,
-                        maxValue: 1200,
-                        baselineColor: '#DDD',
-                        gridlines: {
-                            color: '#DDD',
-                            count: 12
-                        },
-                        textStyle: {
-                            fontSize: 10
+                        prepararDatos();
+                        window.onresize = redibujartablas;
+                        
+                        /**
+                         * Funcion que lanza la funcion de redibujar las tablas.
+                         * Fue necesaria para utilizarla en el onresize sin que provocara fallos
+                         */
+                        function redibujartablas() {
+                            DibujarCharts();
                         }
-                    },
-                    legend: {
-                        position: 'bottom',
-                        textStyle: {
-                            fontSize: 12
-                        }
-                    },
-                    animation: {
-                        duration: 1200,
-                        easing: 'out',
-                        startup: true
-                    }
-                };
-
-                var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
-
-                chart.draw(data, lineOptions);
-
-
-                // BEGIN PIE CHART
-
-                // pie chart data
-                var pieData = google.visualization.arrayToDataTable([
-                    ['Empresa', 'Nota Media'],
-                    ['EA', <?php echo number_format($notamediaea, 2) ?>],
-                    ['Microsoft', <?php echo number_format($notamediamicrosoft, 2) ?>],
-                    ['Bethesda', <?php echo number_format($notamediabethesda, 2) ?>],
-                    ['PC Gaming', <?php echo number_format($notamediapcgaming, 2) ?>],
-                    ['Ubisoft', <?php echo number_format($notamediaubisoft, 2) ?>],
-                    ['Sony', <?php echo number_format($notamediasony, 2) ?>],
-                    ['Nintendo', <?php echo number_format($notamedianintendo, 2) ?>]
-                ]);
-                // pie chart options
-                var pieOptions = {
-                    backgroundColor: 'transparent',
-                    pieHole: 0.4,
-                    colors: colores,
-                    pieSliceText: 'value',
-                    tooltip: {
-                        text: 'percentage'
-                    },
-                    fontName: 'Open Sans',
-                    chartArea: {
-                        width: '100%',
-                        height: '94%'
-                    },
-                    legend: {
-                        textStyle: {
-                            fontSize: 13
-                        }
-                    }
-                };
-                // draw pie chart
-                var pieChart = new google.visualization.PieChart(document.getElementById('pie-chart'));
-                pieChart.draw(pieData, pieOptions);
-            }
-            window.onresize = drawCharts;
         </script>
         <script src="http://code.jquery.com/jquery.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
