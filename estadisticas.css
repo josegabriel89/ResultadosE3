@@ -1,0 +1,72 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+          #bar-chart {
+/*                width: 500px;*/
+                height: 300px;
+/*                position: relative;*/
+            }
+/*              #bar-chart::before, #line-chart::before {
+                content: "";
+                position: absolute;
+                display: block;
+                width: 240px;
+                height: 30px;
+                left: 155px;
+                top: 254px;
+                background: #FAFAFA;
+                box-shadow: 1px 1px 0 0 #DDD;
+            }*/
+            #bar-chart {
+/*                width: 100%;*/
+                height: 300px;
+/*                position: relative;*/
+            }
+            #bar-chart::before, #line-chart::before {
+                content: "";
+                position: absolute;
+                display: block;
+                width: 96%;
+                height: 30px;
+                left: 2%;
+/*                left: 155px;*/
+/*                top: 265px;*/
+                bottom: 5px;
+                background: #FAFAFA;
+                box-shadow: 1px 1px 0 0 #DDD;
+            }
+            #line-chart {
+/*                width: 100%;*/
+                height: 300px;
+/*                position: relative;*/
+            }
+            #pie-chart {
+/*                width: 100%;*/
+                height: 300px;
+/*                position: relative;*/
+            }
+/*            #pie-chart::before {
+                content: "";
+                position: absolute;
+                display: block;
+                width: 120px;
+                height: 115px;
+                left: 315px;
+                top: 0;
+                background: #FAFAFA;
+                box-shadow: 1px 1px 0 0 #DDD;
+            }*/
+            #pie-chart::after {
+                content: "";
+                position: absolute;
+                display: block;
+                top: 96%;
+                left: 19%;
+                width: 170px;
+                height: 2px;
+                background: rgba(0,0,0,0.1);
+                border-radius: 50%;
+                box-shadow: 0 0 3px 4px rgba(0,0,0,0.1);
+            }
+            #bar-chart > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > svg:nth-child(1) > g:nth-child(4) > g:nth-child(1) > text:nth-child(1){
+                font-size: 14px;
+            }
